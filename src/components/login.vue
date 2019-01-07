@@ -3,19 +3,19 @@
         <div class="loginwarrp">
             <div class="logo">管理员登陆</div>
             <div class="login_form">
-                <form id="Login" name="Login" method="post" onsubmit="" action="">
+                <form ref="formLogin" :model="formLogin" :rules="ruleLogin">
                     <li class="login-item">
-                        <span>用户名：</span>
-                        <input type="text" id="username" name="UserName" class="login_input">
-                        <span id="count-msg" class="error"></span>
+                            <span>用户名：</span>
+                            <input v-model="formLogin.username" type="text" class="login_input">
+                            <span id="count-msg" class="error"></span>
                     </li>
                     <li class="login-item">
-                        <span>密　码：</span>
-                        <input type="password" id="password" name="password" class="login_input">
+                        <span>密  码：</span>
+                        <input v-model="formLogin.password" type="password" class="login_input">
                         <span id="password-msg" class="error"></span>
                     </li>
                     <li class="login-sub">
-                        <input type="submit" name="Submit" value="登录"/>
+                        <input type="button" @click="" value="登录"/><span style="padding: 20px"></span>
                         <input type="reset" name="Reset" value="重置"/>
                     </li>
                 </form>
@@ -26,7 +26,29 @@
 
 <script>
     export default {
-        name: "login"
+        name: "login",
+        data() {
+            return {
+                code: null,
+                formLogin: {
+                    username: 'zhouchong',
+                    password: '123456'
+                },
+                ruleLogin: {
+                    username: [
+                        {required: true, message: 'please fill in your name', trigger: 'blur'}
+                    ],
+                    password: [
+                        {required: true, message: 'please fill in your password', trigger: 'blur'}
+                    ]
+                }
+            }
+        },
+        methods:{
+            login(formLgoin){
+                this.$refs[formLgoin]
+            }
+        }
     }
 </script>
 

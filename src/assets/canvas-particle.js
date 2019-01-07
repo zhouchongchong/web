@@ -1,18 +1,13 @@
-var CanvasParticle = (function(){
+export default  (function(){
 	function getElementByTag(name){
 		return document.getElementsByTagName(name);
 	}
-	function getELementById(id){
-		return document.getElementById(id);
-	}
+
 	// 根据传入的config初始化画布
 	function canvasInit(canvasConfig){
 		canvasConfig = canvasConfig || {};
-		var html = getElementByTag("html")[0];
 		var body = getElementByTag("body")[0];
-		var canvasDiv = getELementById("canvas-particle");
 		var canvasObj = document.createElement("canvas");
-
 		var canvas = {
 			element: canvasObj,
 			points : [],
@@ -72,8 +67,7 @@ var CanvasParticle = (function(){
 	// 画点
 	function drawPoint(canvas){
 		var context = canvas.context,
-			point,
-			dist;
+			point;
 		context.clearRect(0, 0, canvas.element.width, canvas.element.height);
 		context.beginPath();
 		context.fillStyle = "rgb("+ canvas.config.color +")";
@@ -127,7 +121,7 @@ var CanvasParticle = (function(){
 			// point to point
 			for(var j = 0; j < len; j++){
 				if(i != j){
-					dist = Math.round(canvas.points[i].x - canvas.points[j].x) * Math.round(canvas.points[i].x - canvas.points[j].x) + 
+					var dist = Math.round(canvas.points[i].x - canvas.points[j].x) * Math.round(canvas.points[i].x - canvas.points[j].x) +
 							Math.round(canvas.points[i].y - canvas.points[j].y) * Math.round(canvas.points[i].y - canvas.points[j].y);
 					// 两点距离小于吸附距离，而且小于最大连接数，则画线
 					if(dist <= canvas.config.dist && canvas.points[i].max_conn <canvas.config.max_conn){
